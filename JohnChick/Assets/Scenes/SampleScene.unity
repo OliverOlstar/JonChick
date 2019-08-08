@@ -507,7 +507,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tipDirection: 0
-  tipAmount: 50
+  tipAmount: 20
+  tipSpeed: 20
   targetTip: {x: 0, y: 0, z: 0}
   speed: 1
 --- !u!1 &1945152230

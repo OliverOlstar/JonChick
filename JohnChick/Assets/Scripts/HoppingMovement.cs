@@ -6,6 +6,7 @@ public class HoppingMovement : MonoBehaviour
 {
     [SerializeField] private bool tipDirection;
     [SerializeField] private float tipAmount;
+    [SerializeField] private float tipSpeed;
     [SerializeField] private Vector3 targetTip;
 
     public float speed = 1;
@@ -35,13 +36,23 @@ public class HoppingMovement : MonoBehaviour
 
     void tipping()
     {
-        transform.Rotate(targetTip, speed * Time.deltaTime);
+        transform.Rotate(targetTip, speed * tipSpeed * Time.deltaTime);
 
-        Debug.Log(transform.rotation.eulerAngles);
+        Debug.Log(transform.rotation.eulerAngles.z - 360);
 
-        if (Vector3.Angle(transform.rotation.eulerAngles, targetTip) < 0.1f)
+        if (tipDirection)
         {
-            tipDirection = !tipDirection;
+            if (transform.rotation.eulerAngles.z >= targetTip.z && transform.rotation.eulerAngles.z < 180f)
+            {
+                tipDirection = !tipDirection;
+            }
+        }
+        else
+        {
+            if (transform.rotation.eulerAngles.z - 360 <= targetTip.z && transform.rotation.eulerAngles.z > 180f)
+            {
+                tipDirection = !tipDirection;
+            }
         }
     }
 }
