@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using EZCameraShake;
 
 public class PlayerAiming : MonoBehaviour
 {
@@ -67,6 +68,8 @@ public class PlayerAiming : MonoBehaviour
             bullet.transform.localScale *= bulletSize;
             bullet.GetComponent<Rigidbody>().AddForce(new Vector3(transform.forward.x * forwardForce, 0, transform.forward.z * forwardForce), ForceMode.Impulse);
             Destroy(bullet, bulletLife);
+
+            CameraShaker.Instance.ShakeOnce(1, 2, 0.1f, 0.15f);
 
             yield return new WaitForSeconds(1f / bulletsPerSec);
         }
