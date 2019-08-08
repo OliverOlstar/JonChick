@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float maxSpeed = 5f;
+    [SerializeField] private float jumpForce = 5f;
 
     private Rigidbody _rb;
 
@@ -20,6 +21,9 @@ public class PlayerMovement : MonoBehaviour
         moveInput = moveInput.normalized * moveSpeed * Time.deltaTime;
 
         if (_rb.velocity.magnitude < maxSpeed)
-            _rb.AddForce(moveInput);
+            _rb.AddForce(moveInput, ForceMode.VelocityChange);
+
+        if (Input.GetButtonDown("Jump"))
+            _rb.AddForce(Vector3.up * jumpForce);
     }
 }
