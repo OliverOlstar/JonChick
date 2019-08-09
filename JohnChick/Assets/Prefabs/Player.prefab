@@ -117,6 +117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1592691104}
   - component: {fileID: 1592691105}
+  - component: {fileID: 1472011771}
   m_Layer: 0
   m_Name: Aiming
   m_TagString: Untagged
@@ -152,12 +153,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f36ab584fc03b4408484bcf482bc88e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotationLerpSpeed: 26
+--- !u!114 &1472011771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592691103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c57d1cbd0d0b2440bc3621caecc2626, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 564055542447235845, guid: fb987d867e15f2b408a8732e95813574,
     type: 3}
   muzzle: {fileID: 1267405008}
   forwardForce: 20
-  fireRate: 12
+  bulletsPerSec: 8
+  bulletLife: 2
+  bulletSize: 1
 --- !u!1 &7311742414132771571
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,7 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1592691104}
-  rotateLerpSpeed: 5
+  rotateLerpSpeed: 8
 --- !u!1 &7311742414718083484
 GameObject:
   m_ObjectHideFlags: 0
@@ -310,8 +324,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9692428e0fe62dc47b496f7242adc90a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1000
-  maxSpeed: 100
+  moveSpeed: 50
+  maxSpeed: 6
+  jumpForce: 500
+  rayDistance: 0.3
 --- !u!54 &7311742414718083475
 Rigidbody:
   m_ObjectHideFlags: 0
