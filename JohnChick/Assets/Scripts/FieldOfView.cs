@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.AI;
 
 public class FieldOfView : MonoBehaviour {
 
@@ -23,10 +24,15 @@ public class FieldOfView : MonoBehaviour {
 	public MeshFilter viewMeshFilter;
 	Mesh viewMesh;
 
+	NavMeshAgent nma;
+	float origSpeed;
+
 	void Start() {
 		viewMesh = new Mesh ();
 		viewMesh.name = "View Mesh";
 		viewMeshFilter.mesh = viewMesh;
+		nma = GetComponent<NavMeshAgent>();
+		origSpeed = nma.speed;
 
 		StartCoroutine ("FindTargetsWithDelay", .2f);
 	}
@@ -35,7 +41,7 @@ public class FieldOfView : MonoBehaviour {
 	IEnumerator FindTargetsWithDelay(float delay) {
 		while (true) {
 			yield return new WaitForSeconds (delay);
-			FindVisibleTargets ();
+			FindVisibleTargets();
 		}
 	}
 
@@ -54,6 +60,16 @@ public class FieldOfView : MonoBehaviour {
 				float dstToTarget = Vector3.Distance (transform.position, target.position);
 				if (!Physics.Raycast (transform.position, dirToTarget, dstToTarget, obstacleMask)) {
 					visibleTargets.Add (target);
+					if (target.tag == "Player")
+					{
+						targetFound();
+						transform.LookAt(target);
+						break;
+					}
+					else
+					{
+						targetNotFound();
+					}
 				}
 			}
 		}
@@ -176,4 +192,17 @@ public class FieldOfView : MonoBehaviour {
 		}
 	}
 
+	public void targetFound()
+	{
+		Debug.Log("Target Found!");
+		nma.speed = 0;
+		nma.isStopped = true;
+		
+	}
+
+	public void targetNotFound()
+	{
+		nma.isStopped = false;
+		nma.speed = origSpeed;
+	}
 }
